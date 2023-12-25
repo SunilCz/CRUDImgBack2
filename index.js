@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: ["https://https://crudimg.netlify.app"], // Add your frontend URL(s) here
+    origin: ["http://localhost:3000"], // Add your frontend URL(s) here
   })
 );
 
