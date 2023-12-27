@@ -185,13 +185,12 @@ BlogRouter.get("/search", async (req, res) => {
 
     const results = await Blog.find({
       title: { $regex: new RegExp(query, "i") },
-    });
+    }).select('title image'); // Only select title and image fields
 
     response(res, 200, { query, results });
   } catch (error) {
     response(res, 400, { error: error.message });
   }
 });
-
 
 export default BlogRouter;
