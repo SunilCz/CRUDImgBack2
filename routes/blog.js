@@ -46,18 +46,18 @@ const response = (res, status, result) => {
 };
 
 BlogRouter.get("/", async (req, res) => {
-  const { page = 1, limit = 3 } = req.query;
+  const { page = 1, perPage } = req.query;
 
   try {
     const currentPage = parseInt(page);
     const blogs = await Blog.find()
       .sort("-createdOn")
-      .skip((currentPage - 1) * limit)
-      .limit(parseInt(limit));
+      .skip((currentPage - 1) * perPage)
+      .limit(parseInt(perPage));
 
     const totalBlogs = await Blog.countDocuments();
 
-    const totalPages = Math.ceil(totalBlogs / limit);
+    const totalPages = Math.ceil(totalBlogs / perPage);
 
     const blogsWithImages = blogs.map((blog) => ({
       _id: blog._id,
